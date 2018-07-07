@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'public/circuitName.txt');
+    xhr.open('GET', 'circuitName.txt');
     xhr.onload = function() {
         if (xhr.status === 200) {
             document.getElementById("gpNameHeader").innerHTML = xhr.responseText +
