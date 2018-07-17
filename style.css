@@ -1,9 +1,12 @@
 #rootBody {
     overflow: hidden;
     background-color: #777777;
+    position: fixed;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 #background {
-    padding: 0px 80px 20px;
     background-color: #333333;
 }
 

@@ -7,33 +7,35 @@ angular
         }
     });
 
+var dataLength = 20;
+var margin = { top: 10, right: 20, bottom: 40, left: 30, xAxis: 0};
+var width = window.innerWidth * 0.48;
+var barHeight = 26;
+var height = (barHeight + 3.6) * dataLength;
+
+var x = d3.scaleLinear()
+    .domain([0, 100])        // 100%
+    .range([0, width]);
+var y = d3.scaleLinear()
+    .domain([0, 20])
+    .range([0, height]);
+
 function setUpChart() {
-    var data = new Array(20).fill(0);
-
-    var margin = { top: 10, right: 20, bottom: 40, left: 30 };
-    var width = 800 - margin.left - margin.right;
-    var barHeight = 26;
-    var height = (barHeight + 3.6) * data.length;
-
-    var x = d3.scaleLinear()
-        .domain([0, 100])        // 100%
-        .range([0, width]);
-    var y = d3.scaleLinear()
-        .domain([0, 20])
-        .range([0, height]);
+    var data = new Array(dataLength).fill(0);
 
     var xAxis = d3.axisBottom(x);
     var yAxis = d3.axisLeft(y);
 
     var chart = d3.select(".barChart")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", '100%')
+        .attr("height", height + margin.xAxis + margin.top + margin.bottom)
+        .attr('viewBox','0 0 '+ width + ' ' + (height +  margin.top + margin.bottom + margin.xAxis))
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     chart.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + (height + margin.xAxis) + ")")
         .call(xAxis);
     chart.append("g")
         .attr("class", "y axis")
@@ -57,7 +59,11 @@ function setUpChart() {
         .attr("x", function (d) { 0; })     //HACK!
         .attr("y", function (d, i) { return y(i); })
         .attr("height", barHeight)
-        .attr("width", function (d) { return x(d); })
+        .attr("width", function (d) {
+            var _width = x(d);
+            console.log("d: " + d + ", width: " + _width);
+            return _width;
+        })
         .on('mouseover', tool_tip.show)
         .on('mouseout', tool_tip.hide);
 }
@@ -65,18 +71,7 @@ function setUpChart() {
 //Predictions: {position: promilles}
 function changeData(driver) {
     //Copied from above...
-    var newData = new Array(20).fill(0);   //Create base data
-    var margin = { top: 0, right: 20, bottom: 40, left: 30 };
-    var width = 500 - margin.left - margin.right;
-    var barHeight = 26;
-    var height = (barHeight + 3.6) * newData.length;
-
-    var x = d3.scaleLinear()
-        .domain([0, 60])        //60 the hard-coded max
-        .range([0, width]);
-    var y = d3.scaleLinear()
-        .domain([0, 20])
-        .range([0, height]);
+    var newData = new Array(dataLength).fill(0);   //Create base data
 
     //console.log("changeData called");
     for (var pos in driver.predictions) {
@@ -92,7 +87,8 @@ function changeData(driver) {
         .transition()   //Transitions
         .duration(800)  //time in ms
         .attr("width", function (d) {
-            //console.log(d);
-            return x(d);
-        });
+            var _width = x(d);
+            console.log("d: " + d + ", width: " + _width);
+            return _width;
+        })
 }
