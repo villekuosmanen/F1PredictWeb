@@ -23,9 +23,11 @@
         <h1 id="gpNameHeader"></h1>
     </header>
     <body id="background">
-        <div id="rootBody">
-            <driver-list style="float: left; width: 50%"></driver-list>
-            <div style="float: left; width: 50%">
+        <div id="rootBody" class="row">
+            <div class="col-6">
+                <driver-list ></driver-list>
+            </div>
+            <div class="col-6">
                 <div id="selectedDriver">Choose a driver:</div>
                 <bar-chart></bar-chart>
             </div>
