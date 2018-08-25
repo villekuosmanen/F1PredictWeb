@@ -4,9 +4,18 @@ angular
         templateUrl: "driver-list/driver-list.template.html",
         controller: function DriversController($http) {
             var self = this;
+
+            self.isMobile = false;
+            var mq = window.matchMedia( "(max-width: 768px)" );
+            console.log("Is mobile: " + mq.matches);
+            if (mq.matches) {
+                self.isMobile = true;
+                self.expanded = true;
+            }
+
             $http.get('driversDescribe.json').then(function (driverProfile) {
-                driversDict = {};
-                for (did in driverProfile.data) {
+                var driversDict = {};
+                for (var did in driverProfile.data) {
                     getColor(driverProfile.data[did]);
                     driversDict[did] = driverProfile.data[did];
                 }
@@ -17,7 +26,7 @@ angular
                         driversDict[did].predictions = driverRes.data[did];
                     }
 
-                    driversArray = [];
+                    var driversArray = [];
                     for (did in driversDict) {
                         driversArray.push([did, driversDict[did]]);
                     }
@@ -33,15 +42,38 @@ angular
                     self.drivers = driversArray;
                 });
             });
-            this.rowClicked = function (driver) {
+            this.rowClicked = function (driverTuple) {
                 d3.select("#selectedDriver")
-                    .text(driver.name)
-                    .style("color", driver.color);
-                //console.log(driver);
-                changeData(driver);
+                    .text(driverTuple[1].name)
+                    .style("color", driverTuple[1].color);
+                removeSelections();
+                d3.select('[id="' + driverTuple[0] + '"]').classed("selected", true);
+                if (self.isMobile) {
+                    console.log("Is expanded: " + self.expanded);
+                    if (self.expanded) {
+                        hideRows();
+                    } else {
+                        showAllRows();
+                    }
+                    self.expanded = !self.expanded;
+                }
+                changeData(driverTuple[1]);
             }
         }
     });
+
+function removeSelections() {
+    d3.selectAll(".selected").classed("selected", false);
+}
+
+function hideRows() {
+    console.log(d3.selectAll(".driverListRow:not(.selected)"));
+    d3.selectAll(".driverListRow:not(.selected)").style("display", "none");
+}
+
+function showAllRows() {
+    d3.selectAll(".driverListRow").style("display", "table-row");
+}
 
 function getColor(driver) {
     if (driver.constructor === "Mercedes") {

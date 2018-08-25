@@ -3,7 +3,7 @@
         <th>Name</th>
         <th>Constructor</th>
     </tr>
-    <tr ng-repeat="dTuple in $ctrl.drivers" ng-click="$ctrl.rowClicked(dTuple[1])">
+    <tr ng-repeat="dTuple in $ctrl.drivers" id="{{dTuple[0]}}" class="driverListRow" ng-click="$ctrl.rowClicked(dTuple)">
         <td>
             <svg width="8" height="16">
                 <rect width="7" height="20" style="fill:{{dTuple[1].color}};stroke-width:1;stroke:rgb(0,0,0)"></rect>
@@ -30,5 +30,9 @@
     }
     tr {
         border: 1px solid #333333;
+    }
+    .selected {
+        background-color: #212121;
+        color: #dddddd;
     }
 </style>

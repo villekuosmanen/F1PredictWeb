@@ -26,6 +26,12 @@
     }
 }
 
+a {
+    font-size: large;
+    text-underline: dash;
+    color: lightblue;
+}
+
 [class*="col-"] {
     float: left;
     padding: 15px;
