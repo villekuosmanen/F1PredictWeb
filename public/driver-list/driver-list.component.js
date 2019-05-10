@@ -83,9 +83,9 @@ function getColor(driver) {
         driver.color = "#dc0000";
     }
     else if (driver.constructor === "Red Bull") {
-        driver.color = "#00327d";
+        driver.color = "#1e41ff";
     }
-    else if (driver.constructor === "Force India") {
+    else if (driver.constructor === "Racing Point") {
         driver.color = "#f596c8";
     }
     else if (driver.constructor === "Williams") {
@@ -95,15 +95,15 @@ function getColor(driver) {
         driver.color = "#fff500";
     }
     else if (driver.constructor === "Toro Rosso") {
-        driver.color = "#0032ff";
+        driver.color = "#469bff";
     }
     else if (driver.constructor === "Haas F1 Team") {
-        driver.color = "#5a5a5a";
+        driver.color = "#f0d787";
     }
     else if (driver.constructor === "McLaren") {
         driver.color = "#ff8700";
     }
-    else if (driver.constructor === "Sauber") {
+    else if (driver.constructor === "Alfa Romeo") {
         driver.color = "#9b0000";
     }
     else {
