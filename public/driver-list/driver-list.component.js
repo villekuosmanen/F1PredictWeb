@@ -13,22 +13,35 @@ angular
                 self.expanded = true;
             }
 
-            $http.get('driversDescribe.json').then(function (driverProfile) {
-                var driversDict = {};
-                for (var did in driverProfile.data) {
-                    getColor(driverProfile.data[did]);
-                    driversDict[did] = driverProfile.data[did];
-                }
+            //This concerns the fetching of data, and as such should probably not be in this component...
+                //TODO refactor these into new components
 
-                $http.get('predictions.json').then(function (driverRes) {
-                    //console.log(driversDict);
-                    for (did in driverRes.data) {
-                        driversDict[did].predictions = driverRes.data[did];
-                    }
+            //Fetch index file, sort the years and races in it
+            var indexFileName = 'data/index.json';
+            var mostRecentId = null;
+            var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+            $http.get(indexFileName).then(function (res)  {
+                var years = Object.keys(res.data).sort(collator.compare);
+                //For each year:
+                console.log("Above loop" + years);
+                for (i = 0; i < years.length; i++) {
+                    var races = Object.keys(res.data[years[i]]).sort(collator.compare);
+                    console.log(races);
+                    //TODO add races to a list where user can select them
+                    //Select most recent race.
+                    console.log("In loop");
+                    mostRecentId = races[races.length - 1];
+                }
+                var recentFileName = 'data/' + mostRecentId + '.json';
+                $http.get(recentFileName).then(function (raceData) {
+                    driverProfile = raceData.data["drivers"];
 
                     var driversArray = [];
-                    for (did in driversDict) {
-                        driversArray.push([did, driversDict[did]]);
+                    for (var did in driverProfile) {
+                        //Get used colour and add driver to data dictionary
+                        getColor(driverProfile[did]);
+                        driverProfile[did].predictions = raceData.data["predictions"][did];
+                        driversArray.push([did, driverProfile[did]]);
                     }
                     driversArray.sort(function (a, b) {
                         if (a[1].constructor < b[1].constructor) {
