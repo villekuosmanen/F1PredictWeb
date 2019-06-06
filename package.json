@@ -6,5 +6,6 @@
   "author"       : "Ville Kuosmanen",
   "dependencies" : {
     "express"    : "~4.7.2"
-  }
+  },
+  "scripts": {"start": "node server.js"}
 }
