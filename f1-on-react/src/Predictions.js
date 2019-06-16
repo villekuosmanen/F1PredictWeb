@@ -71,7 +71,8 @@ export default class Predictions extends React.Component {
                     <div>Driver Name...</div>
                     <PredictionsGraph
                         predictions={predictionsForDriver}
-                        color={driverColor} />
+                        color={driverColor} 
+                        selectedDriverId={this.state.selectedDriverId} />
                 </div>
                 <p>Text about these predictions...</p>
             </div>

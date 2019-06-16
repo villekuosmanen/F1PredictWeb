@@ -1,0 +1,7 @@
+.driver-list-table { 
+    margin: 10px 0 0 0;
+    border-collapse: collapse;
+    float: left;
+    background-color: #999999;
+    width: 100%;
+}

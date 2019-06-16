@@ -1,0 +1,9 @@
+.driver-list-row {
+    border: 1px solid #333333;
+}
+
+.driver-list-cell { 
+    text-align: left;
+    font-size: 18px;
+    padding: 4px
+}
