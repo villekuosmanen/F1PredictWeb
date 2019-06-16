@@ -1,13 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Predictions from './Predictions'
 
 function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
+    return (
+        <div>
+            <header>
+                <h1 id="gpNameHeader">F1 Qualification predictions</h1>
+                <a href="https://predictf1.blogspot.com/">Blog</a>
+            </header>
+            <div id="background">
+                <Predictions />
+            </div>
+        </div>
+    );
 }
 
 export default App;
