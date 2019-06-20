@@ -1,4 +1,5 @@
 import React from 'react';
+
 import DriverList from './DriverList';
 import PredictionsGraph from './PredictionsGraph';
 
@@ -10,6 +11,7 @@ export default class Predictions extends React.Component {
         super(props);
         this.state = {
             drivers: {},
+            order: [],
             predictions: {},
             selectedDriverId: null,
             raceName: {},
@@ -23,10 +25,10 @@ export default class Predictions extends React.Component {
         let mostRecentId = undefined;
         const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
         fetch(indexFileName)
-            .then(function (res) {
+            .then(res => {
                 return res.json();
             })
-            .then(function (res) {
+            .then(res => {
                 const years = Object.keys(res).sort(collator.compare);
                 //For each year:
                 console.log("Above loop" + years);
@@ -40,12 +42,13 @@ export default class Predictions extends React.Component {
                 }
                 this.setState({ racesIndex: res });
                 fetch('data/' + mostRecentId + '.json')
-                    .then(function (res) {
+                    .then(res => {
                         return res.json();
                     })
-                    .then(function (res) {
+                    .then(res => {
                         this.setState({
                             drivers: res["drivers"],
+                            order: res["order"],
                             predictions: res["predictions"],
                             raceName: res["name"],
                             raceYear: res["year"],
@@ -55,6 +58,7 @@ export default class Predictions extends React.Component {
     }
 
     handleDriverSelection = (did) => {
+        console.log(did);
         this.setState({ selectedDriverId: did });
     };
 
@@ -66,7 +70,8 @@ export default class Predictions extends React.Component {
                 <div>Race header...</div>
                 <DriverList 
                     onClick={this.handleDriverSelection}
-                    participants={this.state.participants} />
+                    drivers={this.state.drivers}
+                    order={this.state.order} />
                 <div>
                     <div>Driver Name...</div>
                     <PredictionsGraph
