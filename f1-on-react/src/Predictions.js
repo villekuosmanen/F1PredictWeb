@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DriverList from './DriverList';
-import PredictionsGraph from './PredictionsGraph';
+import { PredictionsGraph } from './PredictionsGraph';
 
 /**
  * The parent component for F1 predictions. It contains state for which predictions to use.
@@ -14,7 +14,7 @@ export default class Predictions extends React.Component {
             order: [],
             predictions: {},
             selectedDriverId: null,
-            raceName: {},
+            raceName: "",
             raceYear: null,
             racesIndex: {}
         };
@@ -67,13 +67,19 @@ export default class Predictions extends React.Component {
         const driverColor = this.state.selectedDriverId ? this.state.drivers[this.state.selectedDriverId].color : null; 
         return (
             <div>
-                <div>Race header...</div>
+                <div>{this.state.raceYear} {this.state.raceName} - Qualifying predictions</div>
                 <DriverList 
                     onClick={this.handleDriverSelection}
                     drivers={this.state.drivers}
                     order={this.state.order} />
                 <div>
-                    <div>Driver Name...</div>
+                    {this.state.selectedDriverId ?
+                        <div className="selectedDriverText" 
+                            style={{color: this.state.drivers[this.state.selectedDriverId].color}}>
+                            {this.state.drivers[this.state.selectedDriverId].name}
+                        </div> : 
+                        <div className="selectedDriverText">Choose your driver:</div>
+                    }
                     <PredictionsGraph
                         predictions={predictionsForDriver}
                         color={driverColor} 

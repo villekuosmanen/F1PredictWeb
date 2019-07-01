@@ -60,7 +60,7 @@ a {
     background-color: #333333;
 }
 
-#selectedDriver {
+.selectedDriverText {
     font-size: 20px;
     font-weight: bold;
     padding: 10px 50px 0;
