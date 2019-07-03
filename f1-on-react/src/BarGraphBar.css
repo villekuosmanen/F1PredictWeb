@@ -1,3 +1,20 @@
 .barGraphRowContainer div {
     display: inline-block;
 }
+
+.barGraphRowContainer {
+    height: 31px;
+}
+
+.barGraphBar {
+    height: 88%;
+    vertical-align: middle;
+    transition: width 1s, background-color 1s;
+    transition-timing-function: ease-in-out;
+}
+
+.barGraphLabel {
+    height: 100%;
+    width: 30px;
+    text-align: center;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import DriverList from './DriverList';
 import { PredictionsGraph } from './PredictionsGraph';
+import './Predictions.css';
 
 /**
  * The parent component for F1 predictions. It contains state for which predictions to use.
@@ -68,22 +69,25 @@ export default class Predictions extends React.Component {
         return (
             <div>
                 <div>{this.state.raceYear} {this.state.raceName} - Qualifying predictions</div>
-                <DriverList 
-                    onClick={this.handleDriverSelection}
-                    drivers={this.state.drivers}
-                    order={this.state.order} />
-                <div>
-                    {this.state.selectedDriverId ?
-                        <div className="selectedDriverText" 
-                            style={{color: this.state.drivers[this.state.selectedDriverId].color}}>
-                            {this.state.drivers[this.state.selectedDriverId].name}
-                        </div> : 
-                        <div className="selectedDriverText">Choose your driver:</div>
-                    }
-                    <PredictionsGraph
-                        predictions={predictionsForDriver}
-                        color={driverColor} 
-                        selectedDriverId={this.state.selectedDriverId} />
+                <div className="mainContainer">
+                    <DriverList 
+                        onClick={this.handleDriverSelection}
+                        drivers={this.state.drivers}
+                        order={this.state.order} 
+                    />
+                    <div style={{"min-width": "300px", "width": "100%"}}>
+                        {this.state.selectedDriverId ?
+                            <div className="selectedDriverText" 
+                                style={{color: this.state.drivers[this.state.selectedDriverId].color}}>
+                                {this.state.drivers[this.state.selectedDriverId].name}
+                            </div> : 
+                            <div className="selectedDriverText">Choose your driver:</div>
+                        }
+                        <PredictionsGraph
+                            predictions={predictionsForDriver}
+                            color={driverColor} 
+                            selectedDriverId={this.state.selectedDriverId} />
+                    </div>
                 </div>
                 <p>Text about these predictions...</p>
             </div>

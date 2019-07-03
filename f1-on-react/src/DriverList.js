@@ -13,25 +13,27 @@ export default class DriverList extends React.Component {
 
     render() {
         return (
-            <table className="driver-list-table">
-                <thead>
-                    <tr>
-                        <th>Driver</th>
-                        <th>Constructor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.props.order.map(id => (
-                        <DriverListRow
-                            key={id}
-                            id={id}
-                            driver={this.props.drivers[id.toString()].name}
-                            constructor={this.props.drivers[id.toString()].constructor}
-                            color={this.props.drivers[id.toString()].color} 
-                            onClick={this.props.onClick} />
-                    ))}
-                </tbody>
-            </table>
+            <div style={{"display": "flex", "width": "100%", "min-width": "300px"}}>
+                <table className="driver-list-table">
+                    <thead>
+                        <tr>
+                            <th>Driver</th>
+                            <th>Constructor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.order.map(id => (
+                            <DriverListRow
+                                key={id}
+                                id={id}
+                                driver={this.props.drivers[id.toString()].name}
+                                constructor={this.props.drivers[id.toString()].constructor}
+                                color={this.props.drivers[id.toString()].color} 
+                                onClick={this.props.onClick} />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }

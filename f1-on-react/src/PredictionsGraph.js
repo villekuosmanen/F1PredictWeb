@@ -15,12 +15,11 @@ export class PredictionsGraph extends React.Component {
             return <div />;
         }
         return (
-            <div className="barChart" preserveAspectRatio="none">
+            <div className="barChart">
                 {positions.map(i => {
                     const value = this.props.predictions[i.toString()];
                     const valueAsPercentage = value ? (value / 10.0) + "%" : "0%";
-                    return <BarGraphBar 
-                        height={26} 
+                    return <BarGraphBar  
                         value={valueAsPercentage}
                         maxValue={1000}
                         label={i + 1}
