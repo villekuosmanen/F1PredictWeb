@@ -1,0 +1,7 @@
+.barGraphTooltip {
+    transition: width 1s, background-color 1s;
+    transition-timing-function: ease-in-out;
+    margin-left: 5px;
+    padding: 0 2px 0 2px;
+    border-radius: 3px;
+}

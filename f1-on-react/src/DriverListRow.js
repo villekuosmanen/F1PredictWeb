@@ -1,5 +1,4 @@
 import React from 'react';
-
 import "./driver-list-row.css";
 
 /**
@@ -11,8 +10,12 @@ export default class DriverList extends React.Component {
     }
 
     render() {
+        let className = "driver-list-row";
+        if (this.props.selected) {
+            className += " " + "selected";
+        }
         return (
-            <tr className="driver-list-row" onClick={() => this.props.onClick(this.props.id)} >
+            <tr className={className} onClick={() => this.props.onClick(this.props.id)} >
                 <td className="driver-list-cell">
                     <svg width="8" height="16" style={{fill: this.props.color}} >
                         <rect width="7" height="20"></rect>

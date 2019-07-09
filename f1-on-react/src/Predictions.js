@@ -71,7 +71,7 @@ export default class Predictions extends React.Component {
                 <div>{this.state.raceYear} {this.state.raceName} - Qualifying predictions</div>
                 <div className="mainContainer">
                     <DriverList 
-                        onClick={this.handleDriverSelection}
+                        rowClicked={this.handleDriverSelection}
                         drivers={this.state.drivers}
                         order={this.state.order} 
                     />
@@ -89,7 +89,6 @@ export default class Predictions extends React.Component {
                             selectedDriverId={this.state.selectedDriverId} />
                     </div>
                 </div>
-                <p>Text about these predictions...</p>
             </div>
         );
     }
