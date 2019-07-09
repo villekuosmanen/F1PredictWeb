@@ -16,7 +16,10 @@ export class BarGraphBar extends React.Component {
             <div className="barGraphRowContainer">
                 <div className="barGraphLabel">{this.props.label}</div>
                 <div className="barGraphBar" style={{width: this.props.value, backgroundColor: this.props.color}} />
-                <BarGraphTooltip color={this.props.color} label={this.props.value} />
+                {this.props.value !== '0%' ?
+                    <BarGraphTooltip color={this.props.color} label={this.props.value} /> :
+                    null
+                }
             </div>
         );
     }

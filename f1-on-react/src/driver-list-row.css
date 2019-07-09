@@ -9,6 +9,10 @@
 }
 
 .selected {
-    background-color: #212121;
+    background-color: #111111;
     color: #dddddd;
+}
+
+svg {
+    margin: 0px 5px 0px 2px
 }

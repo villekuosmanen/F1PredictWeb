@@ -4,4 +4,10 @@
     float: left;
     background-color: #999999;
     width: 100%;
+    border: 2px solid #999999
+}
+
+thead {
+    background-color: #111111;
+    color: #dddddd;
 }
