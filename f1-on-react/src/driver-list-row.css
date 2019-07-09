@@ -1,0 +1,18 @@
+.driver-list-row {
+    border: 1px solid #333333;
+}
+
+.driver-list-cell { 
+    text-align: left;
+    font-size: 18px;
+    padding: 4px
+}
+
+.selected {
+    background-color: #111111;
+    color: #dddddd;
+}
+
+svg {
+    margin: 0px 5px 0px 2px
+}
