@@ -8,3 +8,8 @@
         flex-direction: column;
     }
 }
+
+.qualiHeader {
+    color: white;
+    font-weight: bold;
+}

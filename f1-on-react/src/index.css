@@ -21,7 +21,7 @@ code {
 }
 
 a {
-    font-size: large;;
+    font-size: large;
     color: lightblue;
 }
 
@@ -33,6 +33,7 @@ a {
 
 #background {
     background-color: #222222;
+    padding: 1%;
 }
 
 .selectedDriverText {
@@ -42,6 +43,12 @@ a {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-header {
-    color: #dddddd;
+.pageHeader {
+    background-color: #dddddd;
+    padding: 1% 0 1% 0;
+}
+
+.pageHeader > h1 {
+    margin: 0;
+    padding-left: 2%;
 }

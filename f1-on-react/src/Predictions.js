@@ -68,7 +68,7 @@ export default class Predictions extends React.Component {
         const driverColor = this.state.selectedDriverId ? this.state.drivers[this.state.selectedDriverId].color : null; 
         return (
             <div>
-                <div>{this.state.raceYear} {this.state.raceName} - Qualifying predictions</div>
+                <div className="qualiHeader">{this.state.raceYear} {this.state.raceName} - Qualifying predictions</div>
                 <div className="mainContainer">
                     <DriverList 
                         rowClicked={this.handleDriverSelection}

@@ -3,12 +3,12 @@ import Predictions from './Predictions'
 
 function App() {
     return (
-        <div id="background">
-            <header>
+        <div>
+            <div className="pageHeader">
                 <h1 id="gpNameHeader">F1 Qualification predictions</h1>
-                <a href="https://predictf1.blogspot.com/">Blog</a>
-            </header>
-            <div>
+                <a href="https://predictf1.blogspot.com/" style={{display: 'none'}}>Blog</a>
+            </div>
+            <div id="background">
                 <Predictions />
             </div>
         </div>
