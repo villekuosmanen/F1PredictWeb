@@ -2,14 +2,27 @@
     display: flex;
 }
 
+.qualiHeaderText {
+    color: white;
+    font-weight: bold;
+}
+
+.toggleQualiOptionsButton {
+    margin-left: 8px;
+}
+
+.qualiOptionsSelect {
+    width: 50%;
+    margin-top: 5px;
+}
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .mainContainer {
         flex-direction: column;
     }
-}
 
-.qualiHeader {
-    color: white;
-    font-weight: bold;
+    .qualiOptionsSelect {
+        width: 100%;
+    }
 }
