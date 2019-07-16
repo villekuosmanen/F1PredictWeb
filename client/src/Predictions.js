@@ -47,6 +47,7 @@ export default class Predictions extends React.Component {
                     mostRecentId = races[races.length - 1];
                     
                 }
+                racesList.reverse();
                 this.setState({ racesList });
                 fetch('data/' + mostRecentId + '.json')
                     .then(res => {
