@@ -1,7 +1,7 @@
 {
-  "name": "f1-on-react",
-  "version": "0.1.0",
-  "private": true,
+  "name": "f1-predict-web",
+  "version": "1.0.0",
+  "private": false,
   "dependencies": {
     "gh-pages": "^2.1.1",
     "react": "^16.8.6",
@@ -9,6 +9,7 @@
     "react-scripts": "3.0.1",
     "react-select": "^3.0.4"
   },
+  "license": "GPL-3.0-only",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
