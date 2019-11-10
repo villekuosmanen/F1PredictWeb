@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/F1PredictWeb/static/css/main.102662c7.chunk.css",
-    "main.js": "/F1PredictWeb/static/js/main.1d83c66a.chunk.js",
-    "main.js.map": "/F1PredictWeb/static/js/main.1d83c66a.chunk.js.map",
+    "main.js": "/F1PredictWeb/static/js/main.8df5b821.chunk.js",
+    "main.js.map": "/F1PredictWeb/static/js/main.8df5b821.chunk.js.map",
     "runtime~main.js": "/F1PredictWeb/static/js/runtime~main.2d340179.js",
     "runtime~main.js.map": "/F1PredictWeb/static/js/runtime~main.2d340179.js.map",
-    "static/js/2.9aaa3796.chunk.js": "/F1PredictWeb/static/js/2.9aaa3796.chunk.js",
-    "static/js/2.9aaa3796.chunk.js.map": "/F1PredictWeb/static/js/2.9aaa3796.chunk.js.map",
+    "static/js/2.28fbfa1b.chunk.js": "/F1PredictWeb/static/js/2.28fbfa1b.chunk.js",
+    "static/js/2.28fbfa1b.chunk.js.map": "/F1PredictWeb/static/js/2.28fbfa1b.chunk.js.map",
     "index.html": "/F1PredictWeb/index.html",
-    "precache-manifest.0d181b1b53754ba7207875c0cbaa209e.js": "/F1PredictWeb/precache-manifest.0d181b1b53754ba7207875c0cbaa209e.js",
+    "precache-manifest.31d25e9ea50fd19bc4ff472d12b7319b.js": "/F1PredictWeb/precache-manifest.31d25e9ea50fd19bc4ff472d12b7319b.js",
     "service-worker.js": "/F1PredictWeb/service-worker.js",
     "static/css/main.102662c7.chunk.css.map": "/F1PredictWeb/static/css/main.102662c7.chunk.css.map"
   }
