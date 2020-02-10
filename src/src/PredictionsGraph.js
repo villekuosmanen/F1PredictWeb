@@ -15,7 +15,8 @@ export class PredictionsGraph extends React.Component {
             <div className="barChart">
                 {positions.map(i => {
                     const value = this.props.predictions ? this.props.predictions[i.toString()] : null;
-                    const valueAsPercentage = value ? (value / 10.0) + "%" : "0%";
+                    const scaledValue = this.props.year >= 2020 ? (value / 100.0) : (value / 10.0);
+                    const valueAsPercentage = scaledValue ? `${scaledValue}%` : "0%";
                     return <BarGraphBar  
                         value={valueAsPercentage}
                         label={i + 1}

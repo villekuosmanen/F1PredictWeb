@@ -18,7 +18,8 @@ export default class Predictions extends React.Component {
             selectedDriverId: null,
             gpTitle: "",
             racesList: {},
-            changeQualiExpanded: false
+            changeQualiExpanded: false,
+            year: null
         };
 
         //Fetch index file, sort the years and races in it
@@ -59,6 +60,7 @@ export default class Predictions extends React.Component {
                             order: res["order"],
                             predictions: res["predictions"],
                             gpTitle: `${res["year"]} ${res["name"]}`,
+                            year: res["year"],
                         });
                     });
             });
@@ -85,6 +87,7 @@ export default class Predictions extends React.Component {
                     order: res["order"],
                     predictions: res["predictions"],
                     gpTitle: `${res["year"]} ${res["name"]}`,
+                    year: res["year"],
                 });
             });
     }
@@ -125,7 +128,8 @@ export default class Predictions extends React.Component {
                         <PredictionsGraph
                             predictions={predictionsForDriver}
                             color={driverColor} 
-                            selectedDriverId={this.state.selectedDriverId} />
+                            selectedDriverId={this.state.selectedDriverId} 
+                            year={this.state.year} />
                     </div>
                 </div>
             </div>
