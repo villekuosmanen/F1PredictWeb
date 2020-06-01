@@ -24,7 +24,7 @@ export default class Predictions extends React.Component {
 
         //Fetch index file, sort the years and races in it
         //TODO How does this relate to React lifecycle...
-        const indexFileName = 'data/index.json';
+        const indexFileName = `${process.env.PUBLIC_URL}/data/index.json`;
         let mostRecentId = undefined;
         const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
         fetch(indexFileName)
@@ -50,7 +50,7 @@ export default class Predictions extends React.Component {
                 }
                 racesList.reverse();
                 this.setState({ racesList });
-                fetch('data/' + mostRecentId + '.json')
+                fetch(`${process.env.PUBLIC_URL}/data/${mostRecentId}.json`)
                     .then(res => {
                         return res.json();
                     })
@@ -77,7 +77,7 @@ export default class Predictions extends React.Component {
 
     onNewQualiSelected = selection => {
         console.log(selection);
-        fetch('data/' + selection.value + '.json')
+        fetch(`${process.env.PUBLIC_URL}/data/${selection.value}.json`)
             .then(res => {
                 return res.json();
             })
