@@ -1,0 +1,25 @@
+.about-page-root {
+    background-color: #999999;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+@media only screen and (max-width: 768px) {
+    .about-page-root {
+        background-color: #999999;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.about-page-root > p:first-child {
+    margin-top: 0px;
+}
+
+.about-page-root > p:last-child {
+    margin-bottom: 0px;
+}

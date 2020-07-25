@@ -2,13 +2,13 @@ import React from 'react';
 import Select from 'react-select';
 
 import DriverList from './DriverList';
-import { PredictionsGraph } from './PredictionsGraph';
-import './Predictions.css';
+import { QualiPredictionsGraph } from './QualiPredictionsGraph';
+import './QualiPredictions.css';
 
 /**
  * The parent component for F1 predictions. It contains state for which predictions to use.
  */
-export default class Predictions extends React.Component {
+export default class QualiPredictions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -125,7 +125,7 @@ export default class Predictions extends React.Component {
                             </div> : 
                             <div className="selectedDriverText" style={{color: '#888888'}}>Choose your driver:</div>
                         }
-                        <PredictionsGraph
+                        <QualiPredictionsGraph
                             predictions={predictionsForDriver}
                             color={driverColor} 
                             selectedDriverId={this.state.selectedDriverId} 
