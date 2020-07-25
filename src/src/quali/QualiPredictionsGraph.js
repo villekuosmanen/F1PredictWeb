@@ -1,10 +1,10 @@
 import React from 'react';
-import { BarGraphBar } from './BarGraphBar';
+import { BarGraphBar } from '../bar-graph/BarGraphBar';
 
 /**
  * The bar graph used in showing predicted results for each driver
  */
-export class PredictionsGraph extends React.Component {
+export class QualiPredictionsGraph extends React.Component {
     constructor(props) {
         super(props);
     }

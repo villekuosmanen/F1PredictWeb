@@ -1,17 +1,41 @@
 import React from 'react';
-import Predictions from './Predictions'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+
+import QualiPredictions from './quali/QualiPredictions'
+import AboutPage from './AboutPage'
 
 function App() {
     return (
-        <div>
+        <Router>
             <div className="pageHeader">
-                <h1 id="gpNameHeader">F1 Qualification predictions</h1>
-                <a href="https://predictf1.blogspot.com/" style={{display: 'none'}}>Blog</a>
+                <Link to="/" id="title">F1Predict</Link>
+                <Link to="/">Quali</Link>
+                <Link to="/race">Race</Link>
+                <Link to="/about">About</Link>
             </div>
             <div id="background">
-                <Predictions />
+                <Switch >
+                    <Route path="/race">
+                        <div class="about-page-root">
+                            <p>
+                                Currently under development
+                            </p>
+                        </div>
+                    </Route>
+                    <Route path="/about">
+                        <AboutPage />
+                    </Route>
+                    <Route path="/">
+                        <QualiPredictions />
+                    </Route>
+                </Switch>
             </div>
-        </div>
+        </Router>
     );
 }
 
