@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b0afa42e3b0642a4aa1717994a86011b",
+    "revision": "e6b6f8aa7e3f5e49654e7ede86d503ba",
     "url": "/F1PredictWeb/index.html"
   },
   {
