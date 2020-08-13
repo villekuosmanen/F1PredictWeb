@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import QualiPredictions from './quali/QualiPredictions'
+import RacePredictions from './race/RacePredictions'
 import AboutPage from './AboutPage'
 
 function App() {
@@ -21,11 +22,7 @@ function App() {
             <div id="background">
                 <Switch >
                     <Route path="/race">
-                        <div class="about-page-root">
-                            <p>
-                                Currently under development
-                            </p>
-                        </div>
+                        <RacePredictions />
                     </Route>
                     <Route path="/about">
                         <AboutPage />
