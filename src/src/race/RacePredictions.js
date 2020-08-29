@@ -18,6 +18,7 @@ export default class RacePredictions extends React.Component {
             selectedDriverId: null,
             gpTitle: "",
             racesList: {},
+            selectedRace: null,
             changeQualiExpanded: false,
             year: null
         };
@@ -61,6 +62,7 @@ export default class RacePredictions extends React.Component {
                             predictions: res["predictions"],
                             gpTitle: `${res["year"]} ${res["name"]}`,
                             year: res["year"],
+                            selectedRace: mostRecentId
                         });
                     });
             });
@@ -73,6 +75,34 @@ export default class RacePredictions extends React.Component {
 
     onToggleQualiOptionsSelected = () => {
         this.setState({changeQualiExpanded: !this.state.changeQualiExpanded});
+    }
+
+    onChangeIncludeQuali = (event) => {
+        if (event.target.value === "Yes") {
+            fetch(`${process.env.PUBLIC_URL}/data/races/${this.state.selectedRace}_afterQuali.json`)
+            .then(res => {
+                return res.json();
+            })
+            .then(res => {
+                this.setState({
+                    drivers: res["drivers"],
+                    order: res["order"],
+                    predictions: res["predictions"],
+                });
+            });
+        } else {
+            fetch(`${process.env.PUBLIC_URL}/data/races/${this.state.selectedRace}.json`)
+            .then(res => {
+                return res.json();
+            })
+            .then(res => {
+                this.setState({
+                    drivers: res["drivers"],
+                    order: res["order"],
+                    predictions: res["predictions"],
+                });
+            });
+        }
     }
 
     onNewQualiSelected = selection => {
@@ -88,6 +118,8 @@ export default class RacePredictions extends React.Component {
                     predictions: res["predictions"],
                     gpTitle: `${res["year"]} ${res["name"]}`,
                     year: res["year"],
+                    selectedDriverId: null,
+                    selectedRace: selection.value
                 });
             });
     }
@@ -110,6 +142,11 @@ export default class RacePredictions extends React.Component {
                             onChange={this.onNewQualiSelected}
                         />
                     </div> : null}
+                    <div onChange={this.onChangeIncludeQuali}>
+                        <span className="qualiHeaderText" >Include qualifying results in prediction</span>
+                        <input type="radio" value="Yes" name="include_quali" /> <span className="qualiHeaderText" >Yes</span>
+                        <input type="radio" value="No" name="include_quali" defaultChecked /> <span className="qualiHeaderText" >No</span>
+                    </div>
                 </div>
                 <div className="mainContainer">
                     <DriverList 
