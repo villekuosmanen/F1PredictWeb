@@ -12,15 +12,24 @@ export default class RacePredictions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            drivers: {},
-            order: [],
-            predictions: {},
+            withoutQuali: {
+                drivers: {},
+                order: [],
+                predictions: {},
+            },
+            withQuali: {
+                drivers: {},
+                order: [],
+                predictions: {},
+            },
             selectedDriverId: null,
             gpTitle: "",
             racesList: {},
             selectedRace: null,
             changeQualiExpanded: false,
-            year: null
+            year: null,
+            qualiIncludedPredictionExists: false,
+            qualiIncludedSelected: false,
         };
 
         //Fetch index file, sort the years and races in it
@@ -47,7 +56,7 @@ export default class RacePredictions extends React.Component {
                     //Select most recent race.
                     console.log("In loop");
                     mostRecentId = races[races.length - 1];
-                    
+
                 }
                 racesList.reverse();
                 this.setState({ racesList });
@@ -56,14 +65,42 @@ export default class RacePredictions extends React.Component {
                         return res.json();
                     })
                     .then(res => {
-                        this.setState({
-                            drivers: res["drivers"],
-                            order: res["order"],
-                            predictions: res["predictions"],
-                            gpTitle: `${res["year"]} ${res["name"]}`,
-                            year: res["year"],
-                            selectedRace: mostRecentId
-                        });
+                        fetch(`${process.env.PUBLIC_URL}/data/races/${mostRecentId}_afterQuali.json`)
+                            .then(check => {
+                                return check.json();
+                            })
+                            .then(check => {
+                                this.setState({
+                                    withoutQuali: {
+                                        drivers: res["drivers"],
+                                        order: res["order"],
+                                        predictions: res["predictions"],
+                                    },
+                                    withQuali: {
+                                        drivers: check["drivers"],
+                                        order: check["order"],
+                                        predictions: check["predictions"],
+                                    },
+                                    gpTitle: `${res["year"]} ${res["name"]}`,
+                                    year: res["year"],
+                                    selectedRace: mostRecentId,
+                                    qualiIncludedPredictionExists: true,
+                                });
+                            })
+                            .catch((error) => {
+                                this.setState({
+                                    withoutQuali: {
+                                        drivers: res["drivers"],
+                                        order: res["order"],
+                                        predictions: res["predictions"],
+                                    },
+                                    gpTitle: `${res["year"]} ${res["name"]}`,
+                                    year: res["year"],
+                                    selectedRace: mostRecentId,
+                                    qualiIncludedPredictionExists: false,
+                                    qualiIncludedSelected: false,
+                                });
+                            })
                     });
             });
     }
@@ -74,35 +111,13 @@ export default class RacePredictions extends React.Component {
     };
 
     onToggleQualiOptionsSelected = () => {
-        this.setState({changeQualiExpanded: !this.state.changeQualiExpanded});
+        this.setState({ changeQualiExpanded: !this.state.changeQualiExpanded });
     }
 
     onChangeIncludeQuali = (event) => {
-        if (event.target.value === "Yes") {
-            fetch(`${process.env.PUBLIC_URL}/data/races/${this.state.selectedRace}_afterQuali.json`)
-            .then(res => {
-                return res.json();
-            })
-            .then(res => {
-                this.setState({
-                    drivers: res["drivers"],
-                    order: res["order"],
-                    predictions: res["predictions"],
-                });
-            });
-        } else {
-            fetch(`${process.env.PUBLIC_URL}/data/races/${this.state.selectedRace}.json`)
-            .then(res => {
-                return res.json();
-            })
-            .then(res => {
-                this.setState({
-                    drivers: res["drivers"],
-                    order: res["order"],
-                    predictions: res["predictions"],
-                });
-            });
-        }
+        this.setState({
+            qualiIncludedSelected: !this.state.qualiIncludedSelected,
+        })
     }
 
     onNewQualiSelected = selection => {
@@ -112,29 +127,57 @@ export default class RacePredictions extends React.Component {
                 return res.json();
             })
             .then(res => {
-                this.setState({
-                    drivers: res["drivers"],
-                    order: res["order"],
-                    predictions: res["predictions"],
-                    gpTitle: `${res["year"]} ${res["name"]}`,
-                    year: res["year"],
-                    selectedDriverId: null,
-                    selectedRace: selection.value
-                });
+                fetch(`${process.env.PUBLIC_URL}/data/races/${selection.value}_afterQuali.json`)
+                    .then(check => {
+                        return check.json();
+                    })
+                    .then(check => {
+                        this.setState({
+                            withoutQuali: {
+                                drivers: res["drivers"],
+                                order: res["order"],
+                                predictions: res["predictions"],
+                            },
+                            withQuali: {
+                                drivers: check["drivers"],
+                                order: check["order"],
+                                predictions: check["predictions"],
+                            },
+                            gpTitle: `${res["year"]} ${res["name"]}`,
+                            year: res["year"],
+                            selectedRace: selection.value,
+                            qualiIncludedPredictionExists: true,
+                        });
+                    })
+                    .catch((error) => {
+                        this.setState({
+                            withoutQuali: {
+                                drivers: res["drivers"],
+                                order: res["order"],
+                                predictions: res["predictions"],
+                            },
+                            gpTitle: `${res["year"]} ${res["name"]}`,
+                            year: res["year"],
+                            selectedRace: selection.value,
+                            qualiIncludedPredictionExists: false,
+                            qualiIncludedSelected: false,
+                        });
+                    })
             });
     }
 
     render() {
-        const predictionsForDriver = this.state.selectedDriverId ? this.state.predictions[this.state.selectedDriverId] : {};
-        const driverColor = this.state.selectedDriverId ? this.state.drivers[this.state.selectedDriverId].color : null; 
+        const selectedData = this.state.qualiIncludedSelected ? this.state.withQuali : this.state.withoutQuali;
+        const predictionsForDriver = this.state.selectedDriverId ? selectedData.predictions[this.state.selectedDriverId] : {};
+        const driverColor = this.state.selectedDriverId ? selectedData.drivers[this.state.selectedDriverId].color : null;
         return (
             <div>
                 <div className="qualiHeader">
                     <span className="qualiHeaderText">{this.state.gpTitle} - Race predictions</span>
                     <button onClick={this.onToggleQualiOptionsSelected} className='toggleQualiOptionsButton'>
-                        { this.state.changeQualiExpanded ?  'Cancel' : 'Change GP' }
+                        {this.state.changeQualiExpanded ? 'Cancel' : 'Change GP'}
                     </button>
-                    {this.state.changeQualiExpanded ?<div>
+                    {this.state.changeQualiExpanded ? <div>
                         <Select
                             className='qualiOptionsSelect'
                             value={this.state.gpTitle}
@@ -142,30 +185,30 @@ export default class RacePredictions extends React.Component {
                             onChange={this.onNewQualiSelected}
                         />
                     </div> : null}
-                    <div onChange={this.onChangeIncludeQuali}>
+                    {this.state.qualiIncludedPredictionExists ? <div onChange={this.onChangeIncludeQuali}>
                         <span className="qualiHeaderText" >Include qualifying results in prediction</span>
-                        <input type="radio" value="Yes" name="include_quali" /> <span className="qualiHeaderText" >Yes</span>
-                        <input type="radio" value="No" name="include_quali" defaultChecked /> <span className="qualiHeaderText" >No</span>
-                    </div>
+                        <input type="radio" value="Yes" name="include_quali" checked={this.state.qualiIncludedSelected} /> <span className="qualiHeaderText" >Yes</span>
+                        <input type="radio" value="No" name="include_quali" checked={!this.state.qualiIncludedSelected} /> <span className="qualiHeaderText" >No</span>
+                    </div> : null}
                 </div>
                 <div className="mainContainer">
-                    <DriverList 
+                    <DriverList
                         rowClicked={this.handleDriverSelection}
-                        drivers={this.state.drivers}
-                        order={this.state.order} 
+                        drivers={selectedData.drivers}
+                        order={selectedData.order}
                     />
-                    <div style={{"min-width": "300px", "width": "100%"}}>
+                    <div style={{ "min-width": "300px", "width": "100%" }}>
                         {this.state.selectedDriverId ?
-                            <div className="selectedDriverText" 
-                                style={{color: this.state.drivers[this.state.selectedDriverId].color}}>
-                                {this.state.drivers[this.state.selectedDriverId].name}
-                            </div> : 
-                            <div className="selectedDriverText" style={{color: '#888888'}}>Choose your driver:</div>
+                            <div className="selectedDriverText"
+                                style={{ color: driverColor }}>
+                                {selectedData.drivers[this.state.selectedDriverId].name}
+                            </div> :
+                            <div className="selectedDriverText" style={{ color: '#888888' }}>Choose your driver:</div>
                         }
                         <QualiPredictionsGraph
                             predictions={predictionsForDriver}
-                            color={driverColor} 
-                            selectedDriverId={this.state.selectedDriverId} 
+                            color={driverColor}
+                            selectedDriverId={this.state.selectedDriverId}
                             year={this.state.year} />
                     </div>
                 </div>
