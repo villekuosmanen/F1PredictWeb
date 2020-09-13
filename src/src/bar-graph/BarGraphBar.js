@@ -11,7 +11,6 @@ export class BarGraphBar extends React.Component {
     }
 
     render() {
-        console.log(this.props.value);
         return (
             <div className="barGraphRowContainer">
                 <div className="barGraphLabel">{this.props.label}</div>

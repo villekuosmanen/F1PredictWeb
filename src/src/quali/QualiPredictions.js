@@ -34,17 +34,14 @@ export default class QualiPredictions extends React.Component {
             .then(res => {
                 const years = Object.keys(res).sort(collator.compare);
                 //For each year:
-                console.log("Above loop" + years);
                 const racesList = [];
                 for (let i = 0; i < years.length; i++) {
                     const races = Object.keys(res[years[i]]).sort(collator.compare);
                     races.map(id => (
                         racesList.push({ value: id, label: `${years[i]} ${res[years[i]][id]}` })
                     ));
-                    console.log(races);
 
                     //Select most recent race.
-                    console.log("In loop");
                     mostRecentId = races[races.length - 1];
                     
                 }
@@ -67,7 +64,6 @@ export default class QualiPredictions extends React.Component {
     }
 
     handleDriverSelection = (did) => {
-        console.log(did);
         this.setState({ selectedDriverId: did });
     };
 
@@ -76,7 +72,6 @@ export default class QualiPredictions extends React.Component {
     }
 
     onNewQualiSelected = selection => {
-        console.log(selection);
         fetch(`${process.env.PUBLIC_URL}/data/${selection.value}.json`)
             .then(res => {
                 return res.json();

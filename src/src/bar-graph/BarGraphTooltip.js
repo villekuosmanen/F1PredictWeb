@@ -10,7 +10,6 @@ export class BarGraphTooltip extends React.Component {
     }
 
     render() {
-        console.log(this.props.value);
         return (
             <div className="barGraphTooltip" style={{backgroundColor: this.props.color}}>{this.props.label}</div>
         );
