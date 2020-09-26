@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 
 import DriverList from '../quali/DriverList';
-import { QualiPredictionsGraph } from '../quali/QualiPredictionsGraph';
+import { RacePredictionsGraph } from './RacePredictionsGraph';
 import '../quali/QualiPredictions.css';
 
 /**
@@ -200,7 +200,7 @@ export default class RacePredictions extends React.Component {
                             </div> :
                             <div className="selectedDriverText" style={{ color: '#888888' }}>Choose your driver:</div>
                         }
-                        <QualiPredictionsGraph
+                        <RacePredictionsGraph
                             predictions={predictionsForDriver}
                             color={driverColor}
                             selectedDriverId={this.state.selectedDriverId}
