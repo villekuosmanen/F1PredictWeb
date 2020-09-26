@@ -23,8 +23,19 @@ export default function AboutPage() {
                 compared to the mean and standard deviation of the times of other drivers.
             </p>
             <p>
-                The race model is currently in development, and it will be based around Elo scores. We're hoping to release the race
-                model before the end of the 2020 season.
+                The race model is based on the Elo ranking system. It uses data from past F1 races to calculate a ranking for each
+                driver, constructor and engine. Each race is modelled as a series of head-to-head competitions between drivers.
+                A driver who wins is considered to have won all their head-to-head matchups, while the driver finishing second is
+                recorded one loss (against the winner) and wins for all other matchups. Retired drivers are not considered, meaning
+                that the driver finishing in last place receives losses for all of their matchups. The Elo score of a participant is
+                calculated from the driver, constructor, and engine scores, as well as their track-adjusted counterparts. After a
+                race, Elo scores of drivers, constructors, and engines are adjusted based on the difference between the expected and
+                real scores of all their matchups, with a K-factor of 4 per matchup.
+            </p>
+            <p>
+                Two different race predictions are offered: "Before Quali" makes predictions based on the qualifying result predictions
+                offered by the Qualifying model, while "After Quali" makes predictions based of grid position of drivers. Because of this,
+                "After Quali" predictions should be more accurate.
             </p>
             <p>Credits:</p>
             <ul>
