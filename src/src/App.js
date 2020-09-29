@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Link
@@ -12,7 +12,7 @@ import AboutPage from './AboutPage'
 
 function App() {
     return (
-        <Router>
+        <Router basename='/'>
             <div className="pageHeader">
                 <Link to="/" id="title">F1Predict</Link>
                 <Link to="/">Quali</Link>

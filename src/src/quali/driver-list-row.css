@@ -1,5 +1,6 @@
 .driver-list-row {
     border: 1px solid #333333;
+    height: 31px;
 }
 
 .driver-list-cell { 
