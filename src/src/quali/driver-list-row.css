@@ -1,12 +1,11 @@
 .driver-list-row {
     border: 1px solid #333333;
-    height: 31px;
+    height: 32px;
 }
 
 .driver-list-cell { 
     text-align: left;
     font-size: 18px;
-    padding: 4px
 }
 
 .selected {
