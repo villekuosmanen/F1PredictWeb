@@ -24,11 +24,6 @@
 }
 
 .barGraphLabel_dnf {
-    height: 22px;
-    width: 44px;
-    text-align: center;
-    background-color: #d62744;
-    margin: 15px 3px 3px -19px;
-    border-radius: 2px;
-    font-weight: bold;
+    background-color: #777777;
+    margin: 9px 3px 3px 3px;
 }

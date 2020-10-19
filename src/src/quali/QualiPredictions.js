@@ -83,6 +83,8 @@ export default class QualiPredictions extends React.Component {
                     predictions: res["predictions"],
                     gpTitle: `${res["year"]} ${res["name"]}`,
                     year: res["year"],
+                    selectedDriverId: this.state.selectedDriverId in res["drivers"] 
+                                ? this.state.selectedDriverId : null,
                 });
             });
     }

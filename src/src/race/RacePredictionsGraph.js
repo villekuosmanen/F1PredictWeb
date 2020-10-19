@@ -11,11 +11,11 @@ export class RacePredictionsGraph extends React.Component {
 
     render() {
         const positions = [...Array(20).keys()];
-        positions.push("DNF")
+        positions.push("X")
         return (
             <div className="barChart">
                 {positions.map(i => {
-                    if (i === "DNF") {
+                    if (i === "X") {
                         const value = this.props.predictions ? this.props.predictions["ret"] : null;
                         const scaledValue = this.props.year >= 2020 ? (value / 100.0) : (value / 10.0);
                         const valueAsPercentage = scaledValue ? `${scaledValue}%` : "0%";

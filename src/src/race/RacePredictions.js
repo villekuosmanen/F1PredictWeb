@@ -142,6 +142,8 @@ export default class RacePredictions extends React.Component {
                             year: res["year"],
                             selectedRace: selection.value,
                             qualiIncludedPredictionExists: true,
+                            selectedDriverId: this.state.selectedDriverId in res["drivers"] 
+                                ? this.state.selectedDriverId : null,
                         });
                     })
                     .catch((error) => {
@@ -156,6 +158,8 @@ export default class RacePredictions extends React.Component {
                             selectedRace: selection.value,
                             qualiIncludedPredictionExists: false,
                             qualiIncludedSelected: false,
+                            selectedDriverId: this.state.selectedDriverId in res["drivers"] 
+                                ? this.state.selectedDriverId : null,
                         });
                     })
             });
